@@ -1,11 +1,5 @@
-#-----------------------------------------------------------------------------------------
-# Copyright (c) Microsoft Corporation. All rights reserved.
-# Licensed under the MIT License. See LICENSE in the project root for license information.
-#-----------------------------------------------------------------------------------------
+import requests, bs4, re, time
 
-from flask import Flask
-app = Flask(__name__)
-
-@app.route("/")
-def hello():
-    return app.send_static_file("index.html")
+def getMasterPage():
+    pagedata = requests.get("https://www.baseball-reference.com/boxes/")
+    return bs4.BeautifulSoup(pagedata.text, 'html.parser')
